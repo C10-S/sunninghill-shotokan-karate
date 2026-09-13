@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://c10-s.github.io/sunninghill-shotokan-karate/sitemap.xml
