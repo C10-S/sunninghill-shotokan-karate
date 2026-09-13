@@ -1,0 +1,1024 @@
+/* ==========================================================================
+   Sunninghill Shotokan Karate - Official Theme Stylesheet
+   Brand Palette: Shotokan Red (#C8102E), Jet Black (#0E0E0E), Crisp White (#FFFFFF)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Brand Colors */
+  --sk-red: #C8102E;
+  --sk-red-light: #E52D42;
+  --sk-red-dark: #960A1F;
+  --sk-red-glow: rgba(200, 16, 46, 0.28);
+  --sk-red-subtle: rgba(200, 16, 46, 0.08);
+
+  /* Neutrals & Surfaces */
+  --sk-black: #0E0E0E;
+  --sk-black-deep: #070707;
+  --sk-charcoal: #171717;
+  --sk-surface: #222222;
+  --sk-surface-border: rgba(255, 255, 255, 0.12);
+  --sk-white: #FFFFFF;
+  --sk-offwhite: #F8F9FA;
+  --sk-gray-bg: #F0F2F5;
+  --sk-gray-text: #6C757D;
+  --sk-gray-light: #E9ECEF;
+  --sk-body-text: #212529;
+
+  /* Typography */
+  --sk-font-heading: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --sk-font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+
+  /* Transitions */
+  --sk-transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --sk-transition-smooth: 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Base Styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 85px;
+}
+
+body {
+  font-family: var(--sk-font-body);
+  color: var(--sk-body-text);
+  background-color: var(--sk-offwhite);
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  font-family: var(--sk-font-heading);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--sk-black);
+}
+
+a {
+  color: var(--sk-red);
+  text-decoration: none;
+  transition: color var(--sk-transition-fast);
+}
+
+a:hover {
+  color: var(--sk-red-light);
+}
+
+/* ==========================================================================
+   Navigation Bar
+   ========================================================================== */
+.sk-navbar {
+  min-height: 80px;
+  background-color: rgba(14, 14, 14, 0.96) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 2px solid var(--sk-red);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  transition: background-color var(--sk-transition-smooth), padding var(--sk-transition-smooth);
+}
+
+.sk-navbar .container {
+  max-width: 1240px;
+}
+
+.sk-navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--sk-white) !important;
+  font-family: var(--sk-font-heading);
+  font-weight: 800;
+  font-size: 1.15rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.sk-navbar-brand img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid var(--sk-red);
+  box-shadow: 0 0 10px var(--sk-red-glow);
+  background-color: var(--sk-white);
+  transition: transform var(--sk-transition-smooth), box-shadow var(--sk-transition-smooth);
+}
+
+.sk-navbar-brand:hover img {
+  transform: scale(1.06);
+  box-shadow: 0 0 16px var(--sk-red);
+}
+
+.sk-navbar-brand-title {
+  line-height: 1.15;
+}
+
+.sk-navbar-brand-title small {
+  display: block;
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--sk-red);
+  letter-spacing: 0.12em;
+}
+
+.sk-nav-link {
+  color: rgba(255, 255, 255, 0.85) !important;
+  font-family: var(--sk-font-heading);
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 0.9rem !important;
+  position: relative;
+  transition: color var(--sk-transition-fast);
+}
+
+.sk-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: var(--sk-red);
+  transition: width var(--sk-transition-fast), left var(--sk-transition-fast);
+}
+
+.sk-nav-link:hover,
+.sk-nav-link.active {
+  color: var(--sk-white) !important;
+}
+
+.sk-nav-link:hover::after,
+.sk-nav-link.active::after {
+  width: 70%;
+  left: 15%;
+}
+
+.sk-nav-cta {
+  background: var(--sk-red);
+  color: var(--sk-white) !important;
+  font-family: var(--sk-font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 50px;
+  padding: 0.55rem 1.4rem !important;
+  border: 1px solid var(--sk-red-light);
+  box-shadow: 0 4px 14px var(--sk-red-glow);
+  transition: all var(--sk-transition-fast);
+}
+
+.sk-nav-cta:hover {
+  background: var(--sk-red-light);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px var(--sk-red);
+}
+
+/* ==========================================================================
+   Mobile Responsive Navbar
+   ========================================================================== */
+@media (max-width: 991.98px) {
+  .sk-navbar .navbar-collapse {
+    max-height: calc(100vh - 85px);
+    overflow-y: auto;
+    background-color: rgba(14, 14, 14, 0.98);
+    padding: 1.25rem;
+    border-radius: 0 0 12px 12px;
+    border-bottom: 2px solid var(--sk-red);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7);
+  }
+}
+
+/* ==========================================================================
+   Accordion & Schedule Styling
+   ========================================================================== */
+.sk-accordion .accordion-item {
+  background-color: #161616;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.sk-accordion .accordion-button {
+  background-color: #1e1e1e;
+  color: var(--sk-white);
+  font-family: var(--sk-font-heading);
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 1.25rem 1.5rem;
+  border: none;
+  box-shadow: none !important;
+  transition: all var(--sk-transition-fast);
+}
+
+.sk-accordion .accordion-button:not(.collapsed) {
+  background-color: #242424;
+  color: var(--sk-red-light);
+  border-bottom: 2px solid var(--sk-red);
+}
+
+.sk-accordion .accordion-button::after {
+  filter: brightness(0) invert(1);
+  transition: transform 0.25s ease;
+}
+
+.sk-accordion .accordion-button:not(.collapsed)::after {
+  filter: invert(24%) sepia(85%) saturate(3000%) hue-rotate(345deg);
+}
+
+.sk-accordion .accordion-body {
+  background-color: #141414;
+  color: var(--sk-white);
+  padding: 2rem 1.75rem;
+}
+
+.sk-schedule-table {
+  color: var(--sk-white);
+  border-color: rgba(255, 255, 255, 0.15);
+  margin-bottom: 1rem;
+}
+
+.sk-schedule-table thead th {
+  background-color: var(--sk-red);
+  color: var(--sk-white);
+  font-family: var(--sk-font-heading);
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 0.75rem 0.85rem;
+  border-color: var(--sk-red-dark);
+}
+
+.sk-schedule-table tbody td {
+  padding: 0.75rem 0.85rem;
+  border-color: rgba(255, 255, 255, 0.1);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* ==========================================================================
+   Buttons & CTAs
+   ========================================================================== */
+.btn-shotokan-red {
+  background-color: var(--sk-red);
+  border: 1px solid var(--sk-red-light);
+  color: var(--sk-white);
+  font-family: var(--sk-font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.85rem;
+  border-radius: 6px;
+  box-shadow: 0 4px 16px var(--sk-red-glow);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all var(--sk-transition-fast);
+}
+
+.btn-shotokan-red:hover,
+.btn-shotokan-red:focus {
+  background-color: var(--sk-red-light);
+  color: var(--sk-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--sk-red-glow);
+}
+
+.btn-shotokan-outline {
+  background-color: transparent;
+  border: 2px solid var(--sk-white);
+  color: var(--sk-white);
+  font-family: var(--sk-font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.82rem 1.8rem;
+  border-radius: 6px;
+  transition: all var(--sk-transition-fast);
+}
+
+.btn-shotokan-outline:hover,
+.btn-shotokan-outline:focus {
+  background-color: var(--sk-white);
+  color: var(--sk-black);
+  border-color: var(--sk-white);
+}
+
+.btn-shotokan-dark {
+  background-color: var(--sk-black);
+  border: 1px solid var(--sk-surface-border);
+  color: var(--sk-white);
+  font-family: var(--sk-font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 0.75rem 1.6rem;
+  border-radius: 6px;
+  transition: all var(--sk-transition-fast);
+}
+
+.btn-shotokan-dark:hover {
+  background-color: var(--sk-red);
+  color: var(--sk-white);
+  border-color: var(--sk-red);
+}
+
+/* ==========================================================================
+   Hero Section
+   ========================================================================== */
+@keyframes heroPan {
+  0% { transform: scale(1.08) translateX(-1.5%); }
+  50% { transform: scale(1.08) translateX(1.5%); }
+  100% { transform: scale(1.08) translateX(-1.5%); }
+}
+
+.sk-hero {
+  position: relative;
+  min-height: 640px;
+  display: flex;
+  align-items: center;
+  background-color: var(--sk-black-deep);
+  color: var(--sk-white);
+  overflow: hidden;
+  padding: 7rem 0 5rem;
+  border-bottom: 3px solid var(--sk-red);
+}
+
+.sk-hero::before {
+  content: "";
+  position: absolute;
+  inset: -5%;
+  background: url('../assets/Karate%20header.png') center center / cover no-repeat;
+  filter: brightness(0.38) contrast(1.15);
+  animation: heroPan 30s ease-in-out infinite;
+  z-index: 1;
+}
+
+.sk-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(14, 14, 14, 0.95) 0%,
+    rgba(14, 14, 14, 0.82) 45%,
+    rgba(200, 16, 46, 0.35) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.sk-hero-content {
+  position: relative;
+  z-index: 3;
+}
+
+.sk-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(200, 16, 46, 0.22);
+  border: 1px solid var(--sk-red);
+  color: #FFC0C7;
+  font-family: var(--sk-font-heading);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.4rem 1rem;
+  border-radius: 50px;
+  margin-bottom: 1.25rem;
+}
+
+.sk-hero-title {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--sk-white);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+
+.sk-hero-title span {
+  color: var(--sk-red-light);
+  display: block;
+}
+
+.sk-hero-lead {
+  font-size: 1.2rem;
+  color: rgba(255, 255, 255, 0.9);
+  max-width: 620px;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.sk-hero-highlights {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 2.2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sk-hero-point {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.sk-hero-point svg {
+  color: var(--sk-red-light);
+  flex-shrink: 0;
+}
+
+.sk-hero-crest-card {
+  background: rgba(20, 20, 20, 0.88);
+  backdrop-filter: blur(10px);
+  border: 2px solid var(--sk-red);
+  border-radius: 16px;
+  padding: 2.2rem;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--sk-red-glow);
+  position: relative;
+}
+
+.sk-hero-crest-img {
+  width: 220px;
+  height: 220px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid var(--sk-red);
+  box-shadow: 0 8px 30px var(--sk-red-glow);
+  background-color: var(--sk-white);
+  margin: 0 auto 1.5rem;
+  transition: transform var(--sk-transition-smooth);
+}
+
+.sk-hero-crest-card:hover .sk-hero-crest-img {
+  transform: rotate(3deg) scale(1.03);
+}
+
+.sk-hero-crest-title {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--sk-white);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.35rem;
+}
+
+.sk-hero-crest-sub {
+  color: var(--sk-red-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================================
+   Section Headers
+   ========================================================================== */
+.sk-section-kicker {
+  font-family: var(--sk-font-heading);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sk-red);
+  margin-bottom: 0.5rem;
+  display: inline-block;
+}
+
+.sk-section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.7rem);
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.sk-section-dark {
+  background-color: var(--sk-charcoal);
+  color: var(--sk-white);
+}
+
+.sk-section-dark .sk-section-title {
+  color: var(--sk-white);
+}
+
+/* ==========================================================================
+   Programmes & Offerings
+   ========================================================================== */
+.sk-program-card {
+  background: var(--sk-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  border: 1px solid var(--sk-gray-light);
+  border-bottom: 4px solid var(--sk-red);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: all var(--sk-transition-smooth);
+}
+
+.sk-program-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 40px rgba(200, 16, 46, 0.12), 0 4px 15px rgba(0, 0, 0, 0.08);
+  border-color: rgba(200, 16, 46, 0.3);
+  border-bottom-color: var(--sk-red);
+}
+
+.sk-program-card-header {
+  padding: 1.8rem 1.8rem 1rem;
+}
+
+.sk-program-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--sk-red);
+  background: var(--sk-red-subtle);
+  padding: 0.3rem 0.75rem;
+  border-radius: 4px;
+  margin-bottom: 0.75rem;
+}
+
+.sk-program-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.sk-program-body {
+  padding: 0 1.8rem 1.8rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.sk-program-body p {
+  color: #495057;
+  font-size: 0.94rem;
+  margin-bottom: 1.25rem;
+}
+
+.sk-program-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+}
+
+.sk-program-features li {
+  font-size: 0.88rem;
+  color: #343A40;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sk-program-features li::before {
+  content: "✓";
+  color: var(--sk-red);
+  font-weight: 800;
+}
+
+/* ==========================================================================
+   Instructor Section
+   ========================================================================== */
+.sk-instructor-section {
+  background-color: var(--sk-charcoal);
+  color: var(--sk-white);
+  padding: 5.5rem 0;
+  position: relative;
+  border-top: 3px solid var(--sk-red);
+  border-bottom: 3px solid var(--sk-red);
+}
+
+.sk-instructor-photo-box {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 25px var(--sk-red-glow);
+  border: 2px solid var(--sk-red);
+}
+
+.sk-instructor-photo-box img {
+  width: 100%;
+  height: 480px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
+.sk-instructor-badge-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(0deg, rgba(14, 14, 14, 0.95) 0%, rgba(14, 14, 14, 0.7) 70%, transparent 100%);
+  padding: 1.5rem;
+  color: var(--sk-white);
+}
+
+.sk-instructor-badge-overlay h4 {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--sk-white);
+  margin-bottom: 0.2rem;
+}
+
+.sk-instructor-badge-overlay p {
+  color: var(--sk-red-light);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sk-instructor-card-profile {
+  background: linear-gradient(145deg, #191919 0%, #0c0c0c 100%);
+  border: 2px solid var(--sk-red);
+  border-radius: 12px;
+  padding: 2.5rem 1.8rem;
+  text-align: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6), 0 0 30px var(--sk-red-glow);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.sk-instructor-card-profile .sk-instructor-crest {
+  width: 180px;
+  height: 180px;
+  max-width: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid var(--sk-red);
+  padding: 6px;
+  background-color: var(--sk-white);
+  box-shadow: 0 0 20px var(--sk-red-glow);
+  margin: 0 auto;
+  display: block;
+}
+
+.sk-stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+  margin: 2rem 0;
+}
+
+@media (max-width: 991px) {
+  .sk-stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .sk-stat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.sk-stat-box {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid var(--sk-red);
+  padding: 1.25rem;
+  border-radius: 6px;
+}
+
+.sk-stat-box strong {
+  display: block;
+  font-family: var(--sk-font-heading);
+  font-size: clamp(1.2rem, 2.2vw, 1.8rem);
+  font-weight: 900;
+  color: var(--sk-white);
+  line-height: 1.15;
+  margin-bottom: 0.35rem;
+  word-break: break-word;
+}
+
+.sk-stat-box span {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(255, 255, 255, 0.7);
+  font-weight: 600;
+}
+
+.sk-quote {
+  font-style: italic;
+  font-size: 1.15rem;
+  color: #FFCCD2;
+  border-left: 3px solid var(--sk-red);
+  padding-left: 1.25rem;
+  margin-top: 1.75rem;
+}
+
+/* ==========================================================================
+   Dojo Kun (The 5 Guiding Principles)
+   ========================================================================== */
+.sk-dojo-kun-card {
+  background: var(--sk-white);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 0.9rem;
+  border-left: 5px solid var(--sk-red);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  transition: transform var(--sk-transition-fast), box-shadow var(--sk-transition-fast);
+}
+
+.sk-dojo-kun-card:hover {
+  transform: translateX(6px);
+  box-shadow: 0 6px 18px rgba(200, 16, 46, 0.12);
+}
+
+.sk-dojo-kun-num {
+  font-family: var(--sk-font-heading);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--sk-red);
+  min-width: 36px;
+}
+
+.sk-dojo-kun-content h5 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  margin-bottom: 0.15rem;
+  color: var(--sk-black);
+}
+
+.sk-dojo-kun-content span {
+  font-size: 0.82rem;
+  color: #6C757D;
+  font-style: italic;
+}
+
+/* ==========================================================================
+   Schedule & Tables
+   ========================================================================== */
+.sk-schedule-table {
+  background-color: var(--sk-charcoal);
+  color: var(--sk-white);
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--sk-surface-border);
+  margin-bottom: 1.5rem;
+}
+
+.sk-schedule-table thead tr {
+  background-color: var(--sk-red);
+  color: var(--sk-white);
+}
+
+.sk-schedule-table th {
+  font-family: var(--sk-font-heading);
+  font-weight: 800;
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.9rem 1rem;
+  border-color: var(--sk-red-dark);
+}
+
+.sk-schedule-table td {
+  padding: 0.9rem 1rem;
+  font-size: 0.9rem;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #E0E0E0;
+}
+
+.sk-accordion .accordion-item {
+  background-color: var(--sk-charcoal);
+  border: 1px solid var(--sk-surface-border);
+  margin-bottom: 1rem;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.sk-accordion .accordion-button {
+  background-color: var(--sk-charcoal);
+  color: var(--sk-white);
+  font-family: var(--sk-font-heading);
+  font-weight: 800;
+  font-size: 1.05rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 1.25rem 1.5rem;
+}
+
+.sk-accordion .accordion-button:not(.collapsed) {
+  background-color: var(--sk-black);
+  color: var(--sk-red-light);
+  box-shadow: inset 0 -2px 0 var(--sk-red);
+}
+
+.sk-accordion .accordion-button::after {
+  filter: invert(1);
+}
+
+.sk-accordion .accordion-body {
+  background-color: var(--sk-black-deep);
+  color: #E0E0E0;
+  padding: 1.75rem;
+}
+
+/* ==========================================================================
+   Achievements & Affiliations
+   ========================================================================== */
+.sk-achievement-card {
+  background: var(--sk-charcoal);
+  border: 1px solid var(--sk-surface-border);
+  border-top: 3px solid var(--sk-red);
+  border-radius: 10px;
+  overflow: hidden;
+  height: 100%;
+  transition: transform var(--sk-transition-smooth);
+}
+
+.sk-achievement-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--sk-red);
+}
+
+.sk-achievement-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+  display: block;
+}
+
+.sk-achievement-body {
+  padding: 1.25rem;
+}
+
+.sk-achievement-body h5 {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: var(--sk-white);
+  margin-bottom: 0.4rem;
+}
+
+.sk-achievement-body p {
+  color: #ADB5BD;
+  font-size: 0.85rem;
+  margin-bottom: 0;
+}
+
+.sk-affiliation-logo-btn {
+  background: var(--sk-white);
+  border: 1px solid var(--sk-gray-light);
+  border-radius: 8px;
+  padding: 1rem 1.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--sk-transition-fast);
+  cursor: pointer;
+}
+
+.sk-affiliation-logo-btn img {
+  max-height: 70px;
+  width: auto;
+  object-fit: contain;
+  transition: transform var(--sk-transition-fast);
+}
+
+.sk-affiliation-logo-btn:hover {
+  border-color: var(--sk-red);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px var(--sk-red-glow);
+}
+
+.sk-affiliation-logo-btn:hover img {
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   Trial CTA Strip
+   ========================================================================== */
+.sk-trial-strip {
+  background: linear-gradient(135deg, var(--sk-black) 0%, #1F070B 60%, var(--sk-red-dark) 100%);
+  color: var(--sk-white);
+  padding: 4.5rem 0;
+  border-top: 3px solid var(--sk-red);
+  border-bottom: 3px solid var(--sk-red);
+  text-align: center;
+}
+
+.sk-trial-strip h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: var(--sk-white);
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.sk-trial-strip p {
+  font-size: 1.15rem;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 650px;
+  margin: 0 auto 2rem;
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.sk-footer {
+  background-color: var(--sk-black);
+  color: #ADB5BD;
+  padding: 3.5rem 0 1.5rem;
+  border-top: 2px solid #222;
+  font-size: 0.9rem;
+}
+
+.sk-footer h5 {
+  color: var(--sk-white);
+  font-size: 1rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1.25rem;
+  border-left: 3px solid var(--sk-red);
+  padding-left: 10px;
+}
+
+.sk-footer a {
+  color: #ADB5BD;
+}
+
+.sk-footer a:hover {
+  color: var(--sk-red-light);
+}
+
+.sk-footer-bottom {
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  font-size: 0.8rem;
+}
+
+/* ==========================================================================
+   Scroll Reveal Animations
+   ========================================================================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-scale {
+  opacity: 0;
+  transform: scale(0.94);
+  transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-scale.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sk-hero::before {
+    animation: none;
+  }
+  .reveal,
+  .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

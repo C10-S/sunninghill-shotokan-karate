@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese to English Karate Game | Sunninghill Shotokan Karate</title>
+    <meta name="description"
+        content="Interactive Japanese karate terminology matching game. Learn Shotokan stances, strikes, kicks, blocks, and counting at Sunninghill Shotokan Karate." />
+    <meta name="keywords" content="Karate Game, Japanese Terms, Shotokan Terminology, Martial Arts Quiz, Sunninghill Karate" />
+    <meta name="author" content="Sunninghill Shotokan Karate" />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/logo-square.png" />
+
+    <!-- Stylesheets -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/shotokan-theme.css" rel="stylesheet" />
+
+    <style>
+        .game-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .game-card {
+            background: #161616;
+            border: 2px solid var(--sk-red);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 25px var(--sk-red-glow);
+        }
+
+        .game-term-display {
+            background: #0A0A0A;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .game-term-jp {
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 900;
+            color: var(--sk-red-light);
+            text-transform: capitalize;
+            letter-spacing: -0.01em;
+            margin-bottom: 0.25rem;
+        }
+
+        .game-term-category {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: #ADB5BD;
+            font-weight: 700;
+        }
+
+        .choice-btn {
+            background: #202020;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: #FFFFFF;
+            font-family: var(--sk-font-heading);
+            font-size: 1.05rem;
+            font-weight: 600;
+            padding: 1.1rem 1.4rem;
+            border-radius: 8px;
+            text-align: left;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .choice-btn:hover:not(:disabled) {
+            background: #2E2E2E;
+            border-color: var(--sk-red);
+            transform: translateX(4px);
+            color: #FFFFFF;
+        }
+
+        .choice-btn.correct {
+            background: #1B5E20 !important;
+            border-color: #4CAF50 !important;
+            color: #FFFFFF !important;
+        }
+
+        .choice-btn.incorrect {
+            background: #B71C1C !important;
+            border-color: #F44336 !important;
+            color: #FFFFFF !important;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-between;
+            background: #111;
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-item span {
+            display: block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: #ADB5BD;
+        }
+
+        .score-item strong {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--sk-white);
+        }
+
+        .filter-pill {
+            background: #222;
+            color: #DDD;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.35rem 0.85rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-pill:hover,
+        .filter-pill.active {
+            background: var(--sk-red);
+            border-color: var(--sk-red-light);
+            color: #FFF;
+        }
+    </style>
+</head>
+
+<body style="background-color: #0E0E0E; color: #FFF;">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top sk-navbar">
+        <div class="container">
+            <a class="sk-navbar-brand" href="index.html">
+                <img src="assets/logo-square.png" alt="Sunninghill Shotokan Karate Crest">
+                <div class="sk-navbar-brand-title">
+                    Sunninghill Shotokan Karate
+                    <!-- TODO: Update to the correct established date if not 2015 -->
+                    <small>Funakoshi Style · Est. 2015</small>
+                </div>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#shotokanNav" aria-controls="shotokanNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="shotokanNav">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link sk-nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link sk-nav-link" href="karate.html">About Karate</a></li>
+                    <li class="nav-item"><a class="nav-link sk-nav-link" href="karate.html#curriculum">Syllabus</a></li>
+                    <li class="nav-item"><a class="nav-link sk-nav-link" href="karate.html#schedules">Schedules</a></li>
+                    <li class="nav-item"><a class="nav-link sk-nav-link" href="japanese-english-quiz.html">Karate Quiz</a></li>
+                    <li class="nav-item"><a class="nav-link sk-nav-link active" href="japanese-english-game.html">Terms Game</a></li>
+                    <li class="nav-item ms-lg-3">
+                        <a class="btn sk-nav-cta" href="https://wa.me/27836382129?text=Hello%20Sunninghill%20Shotokan%20Karate%2C%20I%20would%20like%20to%20claim%20my%202%20free%20classes." target="_blank" rel="noopener">
+                            Claim 2 Free Classes
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="sk-hero" style="min-height: 380px; padding: 6rem 0 3rem;">
+        <div class="container sk-hero-content text-center">
+            <div class="sk-hero-badge mx-auto">
+                <span>Interactive Learning Challenge</span>
+            </div>
+            <h1 class="sk-hero-title mb-2">
+                Japanese to English <span>Karate Game</span>
+            </h1>
+            <p class="sk-hero-lead mx-auto mb-3" style="max-width: 650px;">
+                Test your knowledge of Japanese Shotokan Karate terms! Match the Japanese term to its correct English meaning.
+            </p>
+            <div class="d-flex justify-content-center gap-3">
+                <a href="japanese-english-quiz.html" class="btn btn-sm btn-shotokan-outline">
+                    View Full Term Glossary
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Game Area -->
+    <main class="container py-5">
+        <div class="game-wrapper">
+            <!-- Category Filter Pills -->
+            <div class="d-flex flex-wrap gap-2 justify-content-center mb-4" id="categoryFilters">
+                <button class="filter-pill active" data-category="all">All Categories</button>
+                <button class="filter-pill" data-category="numbers">Numbers (1–10)</button>
+                <button class="filter-pill" data-category="stances">Stances (Dachi)</button>
+                <button class="filter-pill" data-category="attacks">Punches &amp; Strikes</button>
+                <button class="filter-pill" data-category="kicks">Kicks (Geri)</button>
+                <button class="filter-pill" data-category="blocks">Blocks (Uke)</button>
+                <button class="filter-pill" data-category="commands">Commands &amp; Etiquette</button>
+            </div>
+
+            <!-- Score Dashboard -->
+            <div class="score-board">
+                <div class="score-item">
+                    <span>Score</span>
+                    <strong id="currentScore" class="text-danger">0</strong>
+                </div>
+                <div class="score-item">
+                    <span>Current Streak</span>
+                    <strong id="currentStreak" class="text-white">0</strong>
+                </div>
+                <div class="score-item">
+                    <span>Best Streak</span>
+                    <strong id="bestStreak" class="text-warning">0</strong>
+                </div>
+                <div class="score-item">
+                    <span>Questions</span>
+                    <strong id="totalAnswered" class="text-secondary">0</strong>
+                </div>
+            </div>
+
+            <!-- Main Interactive Card -->
+            <div class="game-card">
+                <div class="game-term-display">
+                    <div class="game-term-category" id="termCategory">Category: All</div>
+                    <div class="d-flex align-items-center justify-content-center gap-3 mt-1">
+                        <div class="game-term-jp" id="termJp">Hajime</div>
+                        <button id="pronounceBtn" class="btn btn-sm btn-outline-danger text-white rounded-circle p-2" style="width: 38px; height: 38px;" title="Listen to pronunciation">
+                            🔊
+                        </button>
+                    </div>
+                    <small class="text-white-50">Select the correct English translation below:</small>
+                </div>
+
+                <!-- 4 Choices -->
+                <div class="d-grid gap-3" id="choicesContainer">
+                    <button class="choice-btn" data-choice="0">Option A</button>
+                    <button class="choice-btn" data-choice="1">Option B</button>
+                    <button class="choice-btn" data-choice="2">Option C</button>
+                    <button class="choice-btn" data-choice="3">Option D</button>
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedbackArea" class="mt-4 p-3 rounded text-center fw-bold" style="display: none;"></div>
+
+                <div class="text-center mt-4">
+                    <button id="nextBtn" class="btn btn-shotokan-red px-4 py-2" style="display: none;">
+                        Next Question →
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="sk-footer mt-5">
+        <div class="container text-center text-secondary small">
+            <p class="mb-1">© 2026 Sunninghill Shotokan Karate Club. All Rights Reserved.</p>
+            <p class="mb-0"><a href="index.html" class="text-white">Home</a> · <a href="karate.html" class="text-white">About Karate</a> · <a href="japanese-english-quiz.html" class="text-danger">Full Term Glossary</a></p>
+        </div>
+    </footer>
+
+    <!-- Game Engine Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const KARATE_TERMS = [
+            // Numbers
+            { jp: "ichi", en: "one", category: "numbers" },
+            { jp: "ni", en: "two", category: "numbers" },
+            { jp: "san", en: "three", category: "numbers" },
+            { jp: "shi (yon)", en: "four", category: "numbers" },
+            { jp: "go", en: "five", category: "numbers" },
+            { jp: "roku", en: "six", category: "numbers" },
+            { jp: "shichi (nana)", en: "seven", category: "numbers" },
+            { jp: "hachi", en: "eight", category: "numbers" },
+            { jp: "ku (kyuu)", en: "nine", category: "numbers" },
+            { jp: "juu", en: "ten", category: "numbers" },
+
+            // Stances
+            { jp: "hachinoji-dachi", en: "ready / natural stance", category: "stances" },
+            { jp: "zenkutsu-dachi", en: "front stance", category: "stances" },
+            { jp: "kokutsu-dachi", en: "back stance", category: "stances" },
+            { jp: "kiba-dachi", en: "horse riding stance", category: "stances" },
+            { jp: "neko-dachi", en: "cat stance", category: "stances" },
+            { jp: "fudo-dachi", en: "immovable stance", category: "stances" },
+            { jp: "sanchin-dachi", en: "hourglass stance", category: "stances" },
+            { jp: "hangetsu-dachi", en: "half moon stance", category: "stances" },
+
+            // Attacks
+            { jp: "tsuki", en: "punch / thrust", category: "attacks" },
+            { jp: "oi-zuki", en: "lunge punch", category: "attacks" },
+            { jp: "gyaku-zuki", en: "reverse punch", category: "attacks" },
+            { jp: "kizami-zuki", en: "jab punch", category: "attacks" },
+            { jp: "nukite", en: "spear-hand thrust", category: "attacks" },
+            { jp: "uraken-uchi", en: "back-fist strike", category: "attacks" },
+            { jp: "empi-uchi", en: "elbow strike", category: "attacks" },
+            { jp: "shuto-uchi", en: "knife-hand strike", category: "attacks" },
+
+            // Kicks
+            { jp: "mae-geri", en: "front snap kick", category: "kicks" },
+            { jp: "mawashi-geri", en: "roundhouse kick", category: "kicks" },
+            { jp: "yoko-geri kekomi", en: "side thrust kick", category: "kicks" },
+            { jp: "yoko-geri keage", en: "side snap kick", category: "kicks" },
+            { jp: "ushiro-geri", en: "back thrust kick", category: "kicks" },
+
+            // Blocks
+            { jp: "age-uke", en: "rising upper block", category: "blocks" },
+            { jp: "gedan-barai", en: "downward sweeping block", category: "blocks" },
+            { jp: "soto-uke", en: "outside-to-inside block", category: "blocks" },
+            { jp: "uchi-uke", en: "inside-to-outside block", category: "blocks" },
+            { jp: "shuto-uke", en: "knife-hand block", category: "blocks" },
+            { jp: "nagashi-uke", en: "deflecting block", category: "blocks" },
+            { jp: "juji-uke", en: "cross / X block", category: "blocks" },
+
+            // Commands
+            { jp: "rei", en: "bow (show respect)", category: "commands" },
+            { jp: "yoi", en: "ready / prepare", category: "commands" },
+            { jp: "hajime", en: "begin / start", category: "commands" },
+            { jp: "yame", en: "stop / finish", category: "commands" },
+            { jp: "yasume", en: "rest / relax", category: "commands" },
+            { jp: "mawatte", en: "turn around", category: "commands" },
+            { jp: "seiza", en: "kneeling posture", category: "commands" },
+            { jp: "mokuso", en: "meditation / calm focus", category: "commands" },
+            { jp: "kiai", en: "spirit yell / focus shout", category: "commands" },
+            { jp: "sensei", en: "teacher / instructor", category: "commands" },
+            { jp: "dojo", en: "training hall", category: "commands" }
+        ];
+
+        let activeCategory = 'all';
+        let currentQuestion = null;
+        let score = 0;
+        let streak = 0;
+        let bestStreak = 0;
+        let answeredTotal = 0;
+
+        function speak(term) {
+            if (!('speechSynthesis' in window)) return;
+            const utter = new SpeechSynthesisUtterance(term);
+            utter.lang = 'ja-JP';
+            utter.rate = 0.9;
+            window.speechSynthesis.cancel();
+            window.speechSynthesis.speak(utter);
+        }
+
+        function getFilteredTerms() {
+            if (activeCategory === 'all') return KARATE_TERMS;
+            return KARATE_TERMS.filter(t => t.category === activeCategory);
+        }
+
+        function nextQuestion() {
+            const list = getFilteredTerms();
+            if (list.length < 4) return;
+
+            const target = list[Math.floor(Math.random() * list.length)];
+            currentQuestion = target;
+
+            // Pick 3 distractors
+            const distractors = [];
+            const allPossible = KARATE_TERMS.filter(t => t.en !== target.en);
+            while (distractors.length < 3) {
+                const rand = allPossible[Math.floor(Math.random() * allPossible.length)];
+                if (!distractors.includes(rand.en)) {
+                    distractors.push(rand.en);
+                }
+            }
+
+            const choices = [target.en, ...distractors].sort(() => 0.5 - Math.random());
+
+            document.getElementById('termJp').textContent = target.jp;
+            document.getElementById('termCategory').textContent = `Category: ${target.category.toUpperCase()}`;
+
+            const buttons = document.querySelectorAll('.choice-btn');
+            buttons.forEach((btn, index) => {
+                btn.textContent = choices[index];
+                btn.className = 'choice-btn';
+                btn.disabled = false;
+                btn.onclick = () => selectChoice(btn, choices[index], target.en);
+            });
+
+            const feedback = document.getElementById('feedbackArea');
+            feedback.style.display = 'none';
+            document.getElementById('nextBtn').style.display = 'none';
+        }
+
+        function selectChoice(clickedBtn, selectedText, correctText) {
+            const buttons = document.querySelectorAll('.choice-btn');
+            buttons.forEach(btn => btn.disabled = true);
+
+            answeredTotal++;
+            document.getElementById('totalAnswered').textContent = answeredTotal;
+
+            const feedback = document.getElementById('feedbackArea');
+            feedback.style.display = 'block';
+
+            if (selectedText === correctText) {
+                clickedBtn.classList.add('correct');
+                score += 10;
+                streak++;
+                if (streak > bestStreak) bestStreak = streak;
+                feedback.className = 'mt-4 p-3 rounded text-center fw-bold bg-success text-white';
+                feedback.innerHTML = `✓ Correct! <strong>${currentQuestion.jp}</strong> means <em>${correctText}</em>.`;
+            } else {
+                clickedBtn.classList.add('incorrect');
+                streak = 0;
+                // Highlight the correct one
+                buttons.forEach(btn => {
+                    if (btn.textContent === correctText) {
+                        btn.classList.add('correct');
+                    }
+                });
+                feedback.className = 'mt-4 p-3 rounded text-center fw-bold bg-danger text-white';
+                feedback.innerHTML = `✗ Incorrect. <strong>${currentQuestion.jp}</strong> actually means <em>${correctText}</em>.`;
+            }
+
+            document.getElementById('currentScore').textContent = score;
+            document.getElementById('currentStreak').textContent = streak;
+            document.getElementById('bestStreak').textContent = bestStreak;
+
+            document.getElementById('nextBtn').style.display = 'inline-block';
+        }
+
+        document.getElementById('nextBtn').addEventListener('click', nextQuestion);
+
+        document.getElementById('pronounceBtn').addEventListener('click', () => {
+            if (currentQuestion) speak(currentQuestion.jp);
+        });
+
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', function () {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                this.classList.add('active');
+                activeCategory = this.getAttribute('data-category');
+                nextQuestion();
+            });
+        });
+
+        // Initialize game
+        nextQuestion();
+    </script>
+    <!-- Bootstrap Bundle & Custom Scripts -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+</body>
+
+</html>
